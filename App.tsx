@@ -2,9 +2,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import auth from "@react-native-firebase/auth";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Login from "./src/screens.tsx/Login";
-import SignUp from "./src/screens.tsx/SignUp";
-import ForgotPassword from "./src/screens.tsx/ForgotPassword";
+import Login from "./src/screens/Login";
+import SignUp from "./src/screens/SignUp";
+import ForgotPassword from "./src/screens/ForgotPassword";
 
 const Stack = createNativeStackNavigator();
 
