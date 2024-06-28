@@ -6,7 +6,7 @@ import {
 import React from "react";
 import TextField from "../components/TextField";
 import Title from "../components/Title";
-import Spacer from "../components/VerticalSpacer";
+import Spacer from "../components/Spacer";
 import Description from "../components/Description";
 import TextButton from "./TextButton";
 import RoundedButton from "../components/RoundedButton";
