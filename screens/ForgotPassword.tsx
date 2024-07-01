@@ -1,5 +1,10 @@
-import { KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
-import React from "react";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
+import React, { useState } from "react";
 import IconButton from "../components/IconButton";
 import RoundedButton from "../components/RoundedButton";
 import Spacer from "../components/Spacer";
@@ -8,15 +13,36 @@ import TextField from "../components/TextField";
 import Title from "../components/Title";
 import TextButton from "./TextButton";
 import Description from "../components/Description";
+import { forgotPassword, UserAuthResult } from "../api/UserServices";
 
 export default function ForgotPassword({ navigation }: any) {
+  const [email, setEmail] = useState<string>();
   function signIntoYourAccBtnHandler() {
     navigation.navigate("Login");
   }
 
-  function resetBtnHandler() {
-    console.log("Reset Function");
-    navigation.replace("Login");
+  async function resetBtnHandler() {
+    if (email !== undefined) {
+      const result: UserAuthResult = await forgotPassword(email);
+      console.log(result);
+      if (result.status == "success") {
+        navigation.replace("Login");
+      } else {
+        Alert.alert("Warning", result.error, [
+          {
+            text: "Okey",
+            style: "cancel",
+          },
+        ]);
+      }
+    } else {
+      Alert.alert("Warning", "You cant pass empty email!", [
+        {
+          text: "Okey",
+          style: "cancel",
+        },
+      ]);
+    }
   }
 
   function backBtnHandler() {
@@ -24,7 +50,7 @@ export default function ForgotPassword({ navigation }: any) {
   }
 
   function emailAddressHandler(email: string) {
-    console.log(email);
+    setEmail(email);
   }
 
   return (

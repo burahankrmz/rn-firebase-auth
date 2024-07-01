@@ -1,11 +1,10 @@
 import {
+  Alert,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
-  Text,
-  View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import RoundedButton from "../components/RoundedButton";
 import Spacer from "../components/Spacer";
 import Subtext from "../components/Subtext";
@@ -13,35 +12,65 @@ import TextField from "../components/TextField";
 import Title from "../components/Title";
 import TextButton from "./TextButton";
 import IconButton from "../components/IconButton";
+import { signUp, UserAuthResult } from "../api/UserServices";
 
 export default function SignUp({ navigation }: any) {
+  const [firstName, setFirstName] = useState<string>();
+  const [lastName, setLastName] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+
   function backBtnHandler() {
     navigation.pop();
   }
 
   function emailAddressHandler(email: string) {
-    console.log(email);
+    setEmail(email);
   }
 
   function passwordHandler(password: string) {
-    console.log(password);
+    setPassword(password);
   }
 
   function firsNameHandler(firstName: string) {
-    console.log(firstName);
+    setFirstName(firstName);
   }
 
   function lastNameHandler(lastName: string) {
-    console.log(lastName);
+    setLastName(lastName);
   }
 
   function signIntoYourAccBtnHandler() {
     navigation.navigate("Login");
   }
 
-  function signUpBtnHandler() {
-    console.log("Sign Up Function");
-    navigation.replace("Home");
+  async function signUpBtnHandler() {
+    if (
+      firstName !== undefined &&
+      lastName !== undefined &&
+      email !== undefined &&
+      password !== undefined
+    ) {
+      const result: UserAuthResult = await signUp(email, password);
+      console.log(result);
+      if (result.status == "success") {
+        navigation.replace("Home");
+      } else {
+        Alert.alert("Warning", result.error, [
+          {
+            text: "Okey",
+            style: "cancel",
+          },
+        ]);
+      }
+    } else {
+      Alert.alert("Warning", "You cant pass empty information", [
+        {
+          text: "Okey",
+          style: "cancel",
+        },
+      ]);
+    }
   }
 
   return (

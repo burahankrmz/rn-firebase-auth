@@ -1,5 +1,10 @@
-import { KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
-import React from "react";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
+import React, { useState } from "react";
 import TextField from "../components/TextField";
 import Title from "../components/Title";
 import Spacer from "../components/Spacer";
@@ -7,14 +12,17 @@ import Description from "../components/Description";
 import TextButton from "./TextButton";
 import RoundedButton from "../components/RoundedButton";
 import Subtext from "../components/Subtext";
+import { login, UserAuthResult } from "../api/UserServices";
 
 export default function Login({ navigation }: any) {
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
   function emailAddressHandler(email: string) {
-    console.log(email);
+    setEmail(email);
   }
 
   function passwordHandler(password: string) {
-    console.log(password);
+    setPassword(password);
   }
 
   function forgotPasswordBtnPressHandler() {
@@ -25,9 +33,33 @@ export default function Login({ navigation }: any) {
     navigation.navigate("SignUp");
   }
 
-  function loginBtnHandler() {
-    console.log("Login Function");
-    navigation.replace("Home");
+  async function loginBtnHandler() {
+    if (
+      email !== undefined &&
+      password !== undefined &&
+      email !== "" &&
+      password !== ""
+    ) {
+      const result: UserAuthResult = await login(email, password);
+      console.log(result);
+      if (result.status == "success") {
+        navigation.replace("Home");
+      } else {
+        Alert.alert("Warning", result.error, [
+          {
+            text: "Okey",
+            style: "cancel",
+          },
+        ]);
+      }
+    } else {
+      Alert.alert("Warning", "You cant pass empty information", [
+        {
+          text: "Okey",
+          style: "cancel",
+        },
+      ]);
+    }
   }
 
   return (
