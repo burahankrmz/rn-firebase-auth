@@ -1,8 +1,4 @@
-import {
-  KeyboardAvoidingView,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
+import { KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
 import React from "react";
 import TextField from "../components/TextField";
 import Title from "../components/Title";
@@ -31,6 +27,7 @@ export default function Login({ navigation }: any) {
 
   function loginBtnHandler() {
     console.log("Login Function");
+    navigation.replace("Home");
   }
 
   return (
@@ -50,7 +47,7 @@ export default function Login({ navigation }: any) {
           textStyle={{ alignSelf: "flex-end" }}
         />
         <Spacer height={90} />
-        <RoundedButton text="Login" onPress={loginBtnHandler}/>
+        <RoundedButton text="Login" onPress={loginBtnHandler} />
         <Spacer height={24} />
         <Subtext subText="Don't have an account yet?" />
         <Spacer height={6} />

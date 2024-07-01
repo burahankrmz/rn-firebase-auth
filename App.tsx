@@ -1,20 +1,28 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import auth from "@react-native-firebase/auth";
+import { StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Login from "./src/screens/Login";
-import SignUp from "./src/screens/SignUp";
-import ForgotPassword from "./src/screens/ForgotPassword";
+import Login from "./screens/Login";
+import SignUp from "./screens/SignUp";
+import ForgotPassword from "./screens/ForgotPassword";
+import Home from "./screens/Home";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false, headerShadowVisible: false, statusBarHidden: true}}>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerShown: false,
+          headerShadowVisible: false,
+          statusBarHidden: true,
+        }}
+      >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
