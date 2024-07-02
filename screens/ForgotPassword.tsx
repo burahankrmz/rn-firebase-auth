@@ -6,7 +6,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import IconButton from "../components/IconButton";
-import RoundedButton from "../components/RoundedButton";
 import Spacer from "../components/Spacer";
 import Subtext from "../components/Subtext";
 import TextField from "../components/TextField";
@@ -14,6 +13,7 @@ import Title from "../components/Title";
 import TextButton from "./TextButton";
 import Description from "../components/Description";
 import { forgotPassword, UserAuthResult } from "../api/UserServices";
+import AsyncButton from "../components/AsyncButton";
 
 export default function ForgotPassword({ navigation }: any) {
   const [email, setEmail] = useState<string>();
@@ -65,7 +65,7 @@ export default function ForgotPassword({ navigation }: any) {
         <Spacer height={125} />
         <TextField placeHolder="Email Address" onChange={emailAddressHandler} />
         <Spacer height={150} />
-        <RoundedButton text="Reset" onPress={resetBtnHandler} />
+        <AsyncButton text="Reset" onPress={resetBtnHandler} />
         <Spacer height={24} />
         <Subtext subText="Already have an account?" />
         <Spacer height={6} />

@@ -68,3 +68,21 @@ export async function forgotPassword(email: string): Promise<UserAuthResult> {
     };
   }
 }
+
+export async function signOut(): Promise<UserAuthResult> {
+  try {
+    const result: void = await auth().signOut();
+    return {
+      status: "success",
+      userInfo: undefined,
+      error: undefined,
+    };
+  } catch (error: any) {
+    console.log(error);
+    return {
+      status: "error",
+      userInfo: undefined,
+      error: error.message,
+    };
+  }
+}

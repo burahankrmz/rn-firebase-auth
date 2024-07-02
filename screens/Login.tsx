@@ -10,9 +10,9 @@ import Title from "../components/Title";
 import Spacer from "../components/Spacer";
 import Description from "../components/Description";
 import TextButton from "./TextButton";
-import RoundedButton from "../components/RoundedButton";
 import Subtext from "../components/Subtext";
 import { login, UserAuthResult } from "../api/UserServices";
+import AsyncButton from "../components/AsyncButton";
 
 export default function Login({ navigation }: any) {
   const [email, setEmail] = useState<string>();
@@ -79,7 +79,7 @@ export default function Login({ navigation }: any) {
           textStyle={{ alignSelf: "flex-end" }}
         />
         <Spacer height={90} />
-        <RoundedButton text="Login" onPress={loginBtnHandler} />
+        <AsyncButton text="Login" onPress={loginBtnHandler} />
         <Spacer height={24} />
         <Subtext subText="Don't have an account yet?" />
         <Spacer height={6} />

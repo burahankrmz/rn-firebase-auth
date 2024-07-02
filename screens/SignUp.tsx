@@ -5,7 +5,6 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useState } from "react";
-import RoundedButton from "../components/RoundedButton";
 import Spacer from "../components/Spacer";
 import Subtext from "../components/Subtext";
 import TextField from "../components/TextField";
@@ -13,6 +12,7 @@ import Title from "../components/Title";
 import TextButton from "./TextButton";
 import IconButton from "../components/IconButton";
 import { signUp, UserAuthResult } from "../api/UserServices";
+import AsyncButton from "../components/AsyncButton";
 
 export default function SignUp({ navigation }: any) {
   const [firstName, setFirstName] = useState<string>();
@@ -86,7 +86,7 @@ export default function SignUp({ navigation }: any) {
         <TextField placeHolder="Email Address" onChange={emailAddressHandler} />
         <TextField placeHolder="Password" onChange={passwordHandler} />
         <Spacer height={40} />
-        <RoundedButton text="Next" onPress={signUpBtnHandler} />
+        <AsyncButton text="Next" onPress={signUpBtnHandler} />
         <Spacer height={24} />
         <Subtext subText="Already have an account?" />
         <Spacer height={6} />
